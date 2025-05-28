@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="ta"><head>
+<!DOCTYPE html>
+<html lang="ta">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Look at the stars🌟, Look how they shine for you✨</title>
@@ -47,104 +49,140 @@
       font-size: 1rem;
       margin-left: 10px;
     }
+    .typing {
+      font-style: italic;
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
   <div class="chat-box">
-    <h2>Hey Sowmiya 💙 I'm always here for you💫 </h2>
+    <h2>Hey Sowmiya 💙 I'm always here for you💫</h2>
     <div class="chat-log" id="chatLog"></div>
     <input type="text" id="userInput" placeholder="Type anything...">
     <button onclick="handleInput()">Send</button>
   </div>
+
   <script>
     const chatLog = document.getElementById('chatLog');
-    const synth = window.speechSynthesis;let stage = 'start';
+    const synth = window.speechSynthesis;
+    let stage = 'start';
 
-function speak(text) {
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'ta-IN';
-  synth.speak(utter);
-}
-
-function addMessage(sender, text) {
-  const div = document.createElement('div');
-  div.className = `msg ${sender}`;
-  div.innerText = (sender === 'user' ? 'You: ' : 'Man: ') + text;
-  chatLog.appendChild(div);
-  chatLog.scrollTop = chatLog.scrollHeight;
-}
-
-function handleInput() {
-  const input = document.getElementById('userInput');
-  const msg = input.value.trim();
-  if (!msg) return;
-  addMessage('user', msg);
-  input.value = '';
-  processReply(msg.toLowerCase());
-}
-
-function processReply(text) {
-  let reply = '';
-
-  if (stage === 'start') {
-    reply = "Heyy man";
-    stage = 'feeling';
-  } else if (stage === 'feeling') {
-    if (text.includes('good') || text.includes('happy') || text.includes('nalla')) {
-      reply = "Aww that's amazing 💖 Keep glowing, Enna pannitu iruka?";
-    } else if (text.includes('summa') || text.includes('summa dha iruken') || text.includes('nothing')) {
-      reply = "seri man, just do what you like, I'll stand by your side 💫 ";
-    } else if (text.includes('veetuku poitu iruken') || text.includes('office la') || text.includes('office poitu iruken')) {
-      reply = "okay man, pathu poo💗 take care 💙 ";
-    } else if (text.includes('okay') || text.includes('fine') || text.includes('seri')) {
-      reply = "Hmm okay... but I want you to feel amazing 💫 ";
-    } else if (text.includes('bad') || text.includes('sad') || text.includes('onum ila') || text.includes('not good') || text.includes('nothing')) {
-      reply = "Ohh Sowmiya 💔 come here virtual hug 🫂 You’re stronger than you feel, I promise 💙";
-    } else if (text.includes('thanks') || text.includes('Thanks') || text.includes('thank you') || text.includes('Thank you') || text.includes('Ok')) {
-      reply = "heyy man, I'm always there for you💙";
-    } else if (text.includes('tired') || text.includes('thungala') || text.includes('exhausted')) {
-      reply = "You’ve done enough today, Please rest well. You deserve it so much 🌙";
-    } else {
-      reply = "You're feeling something 💙 whatever it is, I'm here for you.";
+    function speak(text) {
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'ta-IN';
+      synth.speak(utter);
     }
-    stage = 'more';
-  } else {
-    const generalReplies = [
-      ["hi", "hello", "Hi", "heyy", "hey", "hii", "yo"], "Heyy man🌟 Eppdi iruka?",
-      ["Good", "nalla iruken", "ok", "not bad", "Ok","good"], "Okay good, keep going forward💪 ",
-      ["lusu", "loosu", "panni", "pakki"], "Haha 🤭! You're the cutest lusu ever💙",
-      ["love", "kaadhal", "viruppam"], "Awww 💘 un heart la so much love iruku. Protect it!",
-      ["bore", "bored", "ennada", "ennachu"], "Boring-a? Sutha polama!😄",
-      ["prechana", "mood seri ila", "kastam", "bayam", "stress"], "Tough moments pass man. Nee than queen 💪 Stay brave!",
-      ["seriously", "mudila", "no energy", "prechanai"], "Sowmiyaaa, take a deep breath 🌬️ Everything will be okay 💖",
-      ["feel", "hurt", "cry", "tears"], "Cry panra? It's okay. I'm with you man 😢 you’ll rise soon 🌈",
-      ["nice", "cool", "awesome", "super"], "Aww thank you 😎 But you’re the real awesome here 💙",
-      ["mudiyuma therila", "motivate", "speech"], "Sowmiya, nee superwoman 💪 Unnal mudiyatha edhuvum illa ✨",
-      ["bye", "byee", "tata", "see you"], "Tataaa Sowmiya 💙 come back soon! Miss you 🥺",
-      ["good morning", "morning"], "Good morning man☀️ Today is your day — shine bright 💫",
-      ["good night", "night", "sleep"], "Good night 🌙 Sweet dreams 💭 you deserve full peace!",
-      ["saptiya", "sapadu", "dinner", "lunch"], "Sapta man, nee? Don’t skip meals okay 🥺 I’ll be upset otherwise!",
-      ["amma", "sanda", "amma kuda"], "Aiyoo... amma kuda sanda? Nee chill panu, ellam sikro seri agido seria 💗",
-      ["enna panra", "ena pandra", "epdi iruka"], "Nee ena man pandra? Naan epovum ready to talk 💬",
-      ["had you", "how are you", "how's your mood", "how's day going"], "I’m always here man 💙 Tell me about your day 🫶"
-    ];
 
-    let found = false;
-    for (let i = 0; i < generalReplies.length; i += 2) {
-      if (generalReplies[i].some(word => text.includes(word))) {
-        reply = generalReplies[i + 1];
-        found = true;
-        break;
+    function addMessage(sender, text) {
+      const div = document.createElement('div');
+      div.className = `msg ${sender}`;
+      div.innerText = (sender === 'user' ? 'You: ' : 'Man: ') + text;
+      chatLog.appendChild(div);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function showTyping(callback) {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'msg bot typing';
+      typingDiv.innerText = 'Typing...';
+      chatLog.appendChild(typingDiv);
+      chatLog.scrollTop = chatLog.scrollHeight;
+
+      setTimeout(() => {
+        chatLog.removeChild(typingDiv);
+        callback();
+      }, 1200);
+    }
+
+    function handleInput() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+      addMessage('user', msg);
+      input.value = '';
+      showTyping(() => processReply(msg.toLowerCase()));
+    }
+
+    function processReply(text) {
+      let reply = '';
+
+      if (stage === 'start') {
+        reply = "Hey man💙";
+        stage = 'feeling';
+      } else if (stage === 'feeling') {
+        if (text.includes('good') || text.includes('happy') || text.includes('nalla')) {
+          reply = "Aww that's amazing 💖 Keep glowing, Enna pannitu iruka?";
+        } else if (text.includes('summa') || text.includes('nothing')) {
+          reply = "seri man, just do what you like, I'll stand by your side 💫 ";
+        } else if (text.includes('veetuku poitu iruken') || text.includes('office')) {
+          reply = "okay man, pathu poo💗 take care 💙 ";
+        } else if (
+          text.includes('okay') || text.includes('fine') ||
+          text.includes('seri') || text.includes('serii') || text.includes('ok')
+        ) {
+          reply = "Seri man 💙";
+        } else if (
+          text.includes('bad') || text.includes('sad') || text.includes('not good') ||
+          text.includes('onum ila')
+        ) {
+          reply = "Ohh Sowmiya 💔 come here virtual hug 🫂 You’re stronger than you feel, I promise 💙";
+        } else if (text.includes('thanks') || text.includes('thank you')) {
+          reply = "heyy man, I'm always there for you💙";
+        } else if (text.includes('tired') || text.includes('thungala') || text.includes('exhausted')) {
+          reply = "You’ve done enough today, Please rest well. You deserve it so much 🌙";
+        } else {
+          reply = "You're feeling something 💙 whatever it is, I'm here for you.";
+        }
+        stage = 'more';
+      } else {
+        const generalReplies = [
+          ["hi", "hello", "heyy", "hey", "hii", "yo"], "Heyy man🌟 Eppdi iruka?",
+          ["good", "nalla iruken", "ok", "not bad"], "Okay good, keep going forward💪 ",
+          ["lusu", "loosu", "panni", "pakki"], "Haha 🤭! You're the cutest lusu ever💙",
+          ["love", "kaadhal", "viruppam"], "Awww 💘 un heart la so much love iruku. Protect it!",
+          ["bore", "bored", "ennada", "ennachu"], "Boring-a? Sutha polama!😄",
+          ["prechana", "mood seri ila", "kastam", "bayam", "stress"], "Tough moments pass man. Nee than queen 💪 Stay brave!",
+          ["seriously", "mudila", "no energy", "prechanai"], "Sowmiyaaa, take a deep breath 🌬️ Everything will be okay 💖",
+          ["feel", "hurt", "cry", "tears"], "Cry panra? It's okay. I'm with you man 😢 you’ll rise soon 🌈",
+          ["nice", "cool", "awesome", "super"], "Aww thank you 😎 But you’re the real awesome here 💙",
+          ["mudiyuma therila", "motivate", "speech"], "Sowmiya, nee superwoman 💪 Unnal mudiyatha edhuvum illa ✨",
+          ["bye", "byee", "tata", "see you"], "Tataaa Sowmiya 💙 come back soon! Miss you 🥺",
+          ["good morning", "morning"], "Good morning man☀️ Today is your day — shine bright 💫",
+          ["good night", "night", "sleep"], "Good night 🌙 Sweet dreams 💭 you deserve full peace!",
+          ["saptiya", "sapadu", "dinner", "lunch"], "Sapta man, nee? Don’t skip meals okay 🥺 I’ll be upset otherwise!",
+          ["amma", "sanda", "amma kuda"], "Aiyoo... amma kuda sanda? Nee chill panu, ellam sikro seri agido seria 💗",
+          ["enna panra", "ena pandra", "epdi iruka"], "Nee ena man pandra? Naan epovum ready to talk 💬",
+          ["daa","deii","Da","poda","Podaa","podaa","dei lusu","paithiyo"], "Heyy🤭, you calling me daa😂 that's what i wished for long😅",
+          ["how are you", "how's your mood", "how's day going"], "I’m always here man 💙 Tell me about your day 🫶"
+        ];
+
+        let found = false;
+        for (let i = 0; i < generalReplies.length; i += 2) {
+          if (generalReplies[i].some(word => text.includes(word))) {
+            reply = generalReplies[i + 1];
+            found = true;
+            break;
+          }
+        }
+
+        if (!found) {
+          reply = "I may not understand every word, but I understand *you*. I'm always here man ";
+        }
       }
+
+      addMessage('bot', reply);
+      speak(reply);
     }
 
-    if (!found) {
-      reply = "I may not understand every word, but I understand *you*. I'm always here man ";
-    }
-  }
-
-  addMessage('bot', reply);
-  speak(reply);
-}
+    window.onload = function () {
+      const welcomeText = "Hey man💙 I'm here for you always... Tell me how you're feeling today?";
+      showTyping(() => {
+        addMessage('bot', welcomeText);
+        speak(welcomeText);
+        stage = 'feeling';
+      });
+    };
   </script>
-</body></html>
+</body>
+</html>
